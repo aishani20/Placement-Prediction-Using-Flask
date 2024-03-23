@@ -39,8 +39,9 @@ def home():
     return response
 
 if __name__ == '__main__':
-    print('Starting Flask API',os.getenv('server_port'))
-    app.run(port=os.getenv('server_port'))
+    port = int(os.getenv('server_port', 5000))
+    print('Starting Flask API on port', port)
+    app.run(port=port)
 
 
     
