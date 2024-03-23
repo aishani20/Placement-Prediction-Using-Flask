@@ -1,0 +1,12 @@
+# Virtual environment
+virtual/
+
+# Other files
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.pyi
+*.egg-info/
+dist/
+build/
