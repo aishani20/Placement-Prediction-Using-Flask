@@ -3,8 +3,13 @@ import os
 import sys
 import json
 from placement import make_prediction
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
+@app.route('/', methods=['GET'])
+def home():
+    return "Hello, World!"
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -29,7 +34,8 @@ def predict():
         return jsonify({"error": str(e)}), 400
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=os.getenv('server_port'))
+
 
     
     
