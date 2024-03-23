@@ -7,10 +7,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-@app.route('/', methods=['GET'])
-def home():
-    return "Hello, World!"
-
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -32,9 +28,20 @@ def predict():
         return jsonify({"prediction": prediction})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+    
+    
+@app.route('/home', methods=['GET'])
+def home():
+    response = jsonify({
+        'message': 'Welcome to Placement Prediction Web App'
+    })
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 if __name__ == '__main__':
+    print('Starting Flask API',os.getenv('server_port'))
     app.run(port=os.getenv('server_port'))
+   
 
 
     
