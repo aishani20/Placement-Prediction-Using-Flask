@@ -4,10 +4,15 @@ import sys
 import json
 from placement import make_prediction
 from dotenv import load_dotenv
+from flask_cors import CORS
 load_dotenv()
 
 app = Flask(__name__)
+
+# cors is cross origin resource sharing, flask-cors is used to allow the frontend to access the backend
+CORS(app, origins='http://127.0.0.1:3000', methods=['GET', 'POST', 'DELETE'])
 @app.route('/predict', methods=['POST'])
+
 def predict():
     try:
         # Get input data from the request
