@@ -10,9 +10,9 @@ load_dotenv()
 app = Flask(__name__)
 
 # cors is cross origin resource sharing, flask-cors is used to allow the frontend to access the backend
-CORS(app, origins='http://127.0.0.1:3000', methods=['GET', 'POST', 'DELETE'])
-@app.route('/predict', methods=['POST'])
+CORS(app, origins='http://localhost:3000', methods=['GET', 'POST', 'DELETE'])
 
+@app.route('/predict', methods=['POST'])
 def predict():
     try:
         # Get input data from the request
@@ -26,11 +26,15 @@ def predict():
         
         
         if (prediction == 0):
-            prediction='The person is not placed'
+            prediction='You have low chances of getting placed.'
+        elif (prediction == 1):
+            prediction= 'The person has high chances of getting placed.'
         else:
-            prediction= 'The person is placed'
+            prediction='Error in prediction. Please contact the developer.'
+            
         # Return the prediction as a JSON response
-        return jsonify({"prediction": prediction})
+        return jsonify({"prediction": prediction,
+                        "input_data": input_data})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
     
