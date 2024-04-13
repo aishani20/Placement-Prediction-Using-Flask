@@ -10,7 +10,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # cors is cross origin resource sharing, flask-cors is used to allow the frontend to access the backend
-CORS(app, origins='http://localhost:3000', methods=['GET', 'POST', 'DELETE'])
+CORS(app, origins=os.getenv('CORS_ORIGIN'), methods=['GET', 'POST', 'DELETE'])
 
 @app.route('/predict', methods=['POST'])
 def predict():
